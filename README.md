@@ -53,7 +53,7 @@ La primera vez la línea del echo se me partió en dos al pegarla y dio un error
 
 Captura 1: ls -l de la carpeta admin, con el index.html y propietario www-data.
 
-![Captura 1](img/captura1.png)
+![Captura 1](captura1.png)
 
 ## Paso 2. Crear el fichero de contraseñas
 
@@ -77,9 +77,9 @@ Al principio se me olvidó el chmod y el fichero quedaba con -rw-r--r--, que dej
 
 Captura 2: el htpasswd y los permisos antes y después del chmod.
 
-![Captura 2a](img/captura2a.png)
+![Captura 2a](captura2a.png)
 
-![Captura 2b](img/captura2b.png)
+![Captura 2b](captura2b.png)
 
 ```bash
 sudo cat /etc/apache2/.htpasswd
@@ -87,7 +87,7 @@ sudo cat /etc/apache2/.htpasswd
 
 Captura 3: contenido del fichero. La contraseña no está en claro, se ve el hash que empieza por $2y$, que es el de bcrypt.
 
-![Captura 3](img/captura3.png)
+![Captura 3](captura3.png)
 
 ## Paso 3. Configurar la autenticación en taskflow.conf
 
@@ -134,7 +134,7 @@ sudo systemctl reload apache2
 
 Captura 4: el fichero taskflow.conf con el bloque de /admin, el configtest con Syntax OK y la recarga. El aviso AH00558 sale porque no hay un ServerName global, pero no afecta a la práctica.
 
-![Captura 4](img/captura4.png)
+![Captura 4](captura4.png)
 
 ## Paso 4. Comprobar que funciona
 
@@ -149,7 +149,7 @@ En los dos casos devuelve HTTP/1.1 401 Unauthorized con la cabecera WWW-Authenti
 
 Captura 5: las dos peticiones con 401.
 
-![Captura 5](img/captura5.png)
+![Captura 5](captura5.png)
 
 Después la pedí con el usuario admin. Al poner solo -u admin, curl pide la contraseña por teclado y así no se queda escrita en el historial:
 
@@ -161,7 +161,7 @@ Con la contraseña correcta devuelve el contenido de la página de administraci�
 
 Captura 6: acceso con la contraseña correcta.
 
-![Captura 6](img/captura6.png)
+![Captura 6](captura6.png)
 
 Por último comprobé que el resto del sitio sigue accesible sin contraseña:
 
@@ -171,7 +171,7 @@ curl -I http://taskflow.local/
 
 Captura 7: la raíz del sitio devuelve 200 OK sin pedir nada.
 
-![Captura 7](img/captura7.png)
+![Captura 7](captura7.png)
 
 ## Paso 5. Añadir y borrar usuarios
 
@@ -201,7 +201,7 @@ Ahí aparece el error AH01617 de auth_basic con Password Mismatch para "/admin/"
 
 Captura 8: el fichero con los dos usuarios, el borrado de profe, el fichero con solo admin y el log con el Password Mismatch.
 
-![Captura 8](img/captura8.png)
+![Captura 8](captura8.png)
 
 Resumen de comandos de htpasswd:
 
